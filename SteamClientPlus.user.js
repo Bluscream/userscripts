@@ -53,7 +53,7 @@ $ = jQuery || $;
 requireCSS('https://cdn.rawgit.com/Bluscream/SteamClient-/master/dist/steam.css', 'steamclientpluscss');
 var joinurl = $('.profile_in_game_joingame>a').attr('href');
 if(joinurl && joinurl != 'steam://'){
-	var _joinurl = joinurl.replace('steam://', '');_joinurl = _joinurl.replace('connect', '');_joinurl = _joinurl.replace('joinlobby', '');
+	var _joinurl = joinurl.replace('steam://', '');_joinurl = _joinurl.replace('connect/', '');_joinurl = _joinurl.replace('joinlobby/730/', '');_joinurl = _joinurl.replace('joinlobby/', '');
 	$('.profile_in_game.persona.in-game').append('</br><input class="join-url dynInput" type="text" title="'+joinurl+'" value="'+_joinurl+'" />');
 	$('.join-url').prop('readonly', true);
 	$('.join-url').on('click', function (e) { open_url_copy($(this).attr('title')); });
@@ -66,7 +66,7 @@ if(joinurl && joinurl != 'steam://'){
 var UserSID = new SteamID(document.documentElement.outerHTML.match(/steamid"\:"(.+)","personaname/)[1]),
 SteamID64 = UserSID.GetCommunityID();
 var linksbox = '<div class="steamids-sidebar"></div>';
-$(".profile_in_game").after(linksbox);
+if(elemExists('.profile_page.private_profile')){$(".profile_ban_status").prepend(linksbox);}else{$(".profile_in_game").after(linksbox);}
 $(".steamids-sidebar").html("<b>Community ID:</b> <span id='cid'>"+UserSID.GetCommunityID()+"</span><br/><b>Steam 2:</b> <span id='id2'>"+UserSID.GetSteam2()+"</span><br/><b>Steam 3:</b> <span id='id3'>"+UserSID.GetSteam3()+"</span><br/>");
 $('#cid,#id2,#id3').on('click', function (e) { open_url_copy($(this).text()); });
 new GM_xmlhttpRequest({
@@ -75,7 +75,7 @@ new GM_xmlhttpRequest({
   onload: function(response) {
   	var _json = JSON.parse(response.responseText);_json = _json.response.id;
   	if(_json && typeof _json !== undefined && _json != "undefined"){
-    	$(".steamids-sidebar").append("<b>TruckersMP ID:</b> <a id='truckersmpid' href='http://truckersmp.com/en_US/user/"+_json+"'>"+_json+"</a><br/>");
+    	$(".steamids-sidebar:not(#bantable)").append("<b>TruckersMP ID:</b> <a id='truckersmpid' href='http://truckersmp.com/en_US/user/"+_json+"'>"+_json+"</a><br/>");
     }
   }
 });
