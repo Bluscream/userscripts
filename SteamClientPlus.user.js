@@ -117,3 +117,4 @@ new GM_xmlhttpRequest({
 if(!elemExists('a[title="javascript:AddFriend()"]')){
 	$('.profile_header_actions').prepend('<a class="btn_profile_action btn_medium" href="steam://friends/add/'+SteamID64+'"><span>Add Friend</span></a>');
 }
+$('.profile_header_actions').append('<a class="btn_profile_action btn_medium" href="steam://friends/message/'+SteamID64+'"><span>Message</span></a>');
