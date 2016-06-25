@@ -118,15 +118,19 @@ div.profile_page {
 	min-height:216px;
 }
 
-.profile_ban_status{
+/*.profile_ban_status{
 	color:red;
 	text-align:center;
 	font-size:16px;
-}
+}*/
 
-.profile_ban{
+/*.profile_ban{
 	font-size:18px;
-}
+}*/
+
+.banned{ color:red; }
+.clean{ color:green; }
+.unknown{ color:orange; }
 
 .profile_summary_footer{
 	display: none;
