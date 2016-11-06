@@ -87,18 +87,18 @@ new GM_xmlhttpRequest({
   onload: function(response) {
   	var _json = JSON.parse(response.responseText);_json = _json.players[0];
   	if(_json){
-    	if(_json.VACBanned){ $('#bantable').append("<b>VAC:</b> <span id='banned_vac' color='red'>BANNED</span> ("+_json.NumberOfVACBans+" times)<br/>");
-    	}else if(_json.VACBanned == false){ $('#bantable').append("<b>VAC:</b> <span id='banned_vac' color='green'>Unbanned</span><br/>");
-    	}else{ $('#bantable').append("<b>VAC:</b> <span id='banned_vac'>Unknown</span><br/>"); }
-    	if(_json.NumberOfGameBans > 0){ $('#bantable').append("<b>Game:</b> <span id='banned_game' color='red'>BANNED</span> ("+_json.NumberOfGameBans+" times)<br/>");
-    	}else if(_json.NumberOfGameBans == 0){ $('#bantable').append("<b>Game:</b> <span id='banned_game' color='green'>Unbanned</span><br/>");
-    	}else{ $('#bantable').append("<b>Game:</b> <span id='banned_game'>Unknown</span><br/>"); }
-    	if(_json.CommunityBanned){ $('#bantable').append("<b>Community:</b> <span id='banned_community' color='red'>BANNED</span><br/>");
-    	}else if(_json.CommunityBanned == false){ $('#bantable').append("<b>Community:</b> <span id='banned_community' color='green'>Unbanned</span><br/>");
-    	}else{ $('#bantable').append("<b>Community:</b> <span id='banned_community'>Unknown</span><br/>"); }
-    	if(_json.EconomyBan && _json.EconomyBan != 'none'){ $('#bantable').append("<b>Trading:</b> <span id='banned_trade' color='red'>BANNED</span><br/>");
-    	}else if(_json.EconomyBan == 'none'){ $('#bantable').append("<b>Trading:</b> <span id='banned_trade' color='green'>Unbanned</span><br/>");
-    	}else{ $('#bantable').append("<b>Trading:</b> <span id='banned_trade'>Unknown</span><br/>"); }
+    	if(_json.VACBanned){ $('#bantable').append("<b>VAC:</b> <span id='banned_vac' style='color:red'>BANNED</span> ("+_json.NumberOfVACBans+" times)<br/>");
+    	}else if(_json.VACBanned == false){ $('#bantable').append("<b>VAC:</b> <span id='banned_vac' style='color:green'>Unbanned</span><br/>");
+    	}else{ $('#bantable').append("<b>VAC:</b> <span id='banned_vac' style='color:yellow'>Unknown</span><br/>"); }
+    	if(_json.NumberOfGameBans > 0){ $('#bantable').append("<b>Game:</b> <span id='banned_game' style='color:red'>BANNED</span> ("+_json.NumberOfGameBans+" times)<br/>");
+    	}else if(_json.NumberOfGameBans == 0){ $('#bantable').append("<b>Game:</b> <span id='banned_game' style='color:green'>Unbanned</span><br/>");
+    	}else{ $('#bantable').append("<b>Game:</b> <span id='banned_game' style='color:yellow'>Unknown</span><br/>"); }
+    	if(_json.CommunityBanned){ $('#bantable').append("<b>Community:</b> <span id='banned_community' style='color:red'>BANNED</span><br/>");
+    	}else if(_json.CommunityBanned == false){ $('#bantable').append("<b>Community:</b> <span id='banned_community' style='color:green'>Unbanned</span><br/>");
+    	}else{ $('#bantable').append("<b>Community:</b> <span id='banned_community' style='color:yellow'>Unknown</span><br/>"); }
+    	if(_json.EconomyBan && _json.EconomyBan != 'none'){ $('#bantable').append("<b>Trading:</b> <span id='banned_trade' style='color:red'>BANNED</span><br/>");
+    	}else if(_json.EconomyBan == 'none'){ $('#bantable').append("<b>Trading:</b> <span id='banned_trade' style='color:green'>Unbanned</span><br/>");
+    	}else{ $('#bantable').append("<b>Trading:</b> <span id='banned_trade' style='color:yellow'>Unknown</span><br/>"); }
     }
   }
 });
@@ -108,9 +108,9 @@ new GM_xmlhttpRequest({
   onload: function(response) {
   	var _json = JSON.parse(response.responseText);_json = _json.response;
   	if(_json && typeof _json !== undefined && _json != "undefined"){
-    	if(_json.length > 0){ $('#bantable').append("<b>TruckersMP:</b> <span id='banned_truckersmp' color='red'>BANNED</span><br/>");
-    	}else if(_json.length == 0){ $('#bantable').append("<b>TruckersMP:</b> <span id='banned_truckersmp' color='green'>Unbanned</span><br/>");
-    	}else{ $('#bantable').append("<b>TruckersMP:</b> <span id='banned_truckersmp'>Unknown</span><br/>"); }
+    	if(_json.length > 0){ $('#bantable').append("<b>TruckersMP:</b> <span id='banned_truckersmp' style='color:orange'>BANNED</span><br/>");
+    	}else if(_json.length == 0){ $('#bantable').append("<b>TruckersMP:</b> <span id='banned_truckersmp' style='color:green'>Unbanned</span><br/>");
+    	}else{ $('#bantable').append("<b>TruckersMP:</b> <span id='banned_truckersmp' style='color:yellow'>Unknown</span><br/>"); }
     }
   }
 });
