@@ -1,0 +1,82 @@
+// ==UserScript==
+// @name         Redirect to Google on No Results
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description Redirect to Google if DuckDuckGo search has no results
+// @author       Your Name
+// @match        *://*.duckduckgo.com/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Function to check if DuckDuckGo has returned no results
+    function checkForNoResults() {
+        console.log('Checking for no results...');
+        // Using the detailed selector provided
+        const noResultsElement = document.querySelector('#react-layout > div > div > div > div > section > div > div > p');
+        if (noResultsElement && noResultsElement.textContent.includes("No results found for")) {
+            console.log('No results found.');
+            return true; // No results were found
+        } else {
+            console.log('Results found.');
+            return false; // Results were found
+        }
+    }
+
+
+    // Function to redirect to Google search
+    function redirectToGoogle(query) {
+        console.log(`Redirecting to Google with query: ${query}`);
+        const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        window.location.href = googleSearchUrl;
+    }
+
+    // Function to extract the "q" parameter from the URL
+    function getQueryFromURL() {
+        console.log('Extracting query from URL...');
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q');
+        console.log(`Query from URL: ${query}`);
+        return query;
+    }
+
+    // Function to get the search query from the search form input
+    function getQueryFromInput() {
+        console.log('Extracting query from input...');
+        const searchInput = document.querySelector('#search_form_input');
+        const query = searchInput ? searchInput.value : null;
+        console.log(`Query from input: ${query}`);
+        return query;
+    }
+
+    // Main function to get the search query, prioritizing the "q" parameter from the URL
+    function getSearchQuery() {
+        let query = getQueryFromURL();
+        if (!query) {
+            query = getQueryFromInput();
+        }
+        console.log(`Final query: ${query}`);
+        return query;
+    }
+
+    // Main function to execute the script
+    function main() {
+        console.log('Script started.');
+        // Check if the page is fully loaded
+        if (document.readyState === 'complete') {
+            // Check if DuckDuckGo has returned no results
+            if (checkForNoResults()) {
+                const searchQuery = getSearchQuery();
+                redirectToGoogle(searchQuery);
+            }
+        } else {
+            // If the page is not fully loaded, wait for it to load
+            window.addEventListener('load', main);
+        }
+    }
+
+    // Execute the main function
+    main();
+})();
